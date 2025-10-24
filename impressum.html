@@ -4,46 +4,86 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Impressum · Ritter Ruben</title>
+  <meta name="description" content="Impressum der Website Ritter Ruben.">
   <style>
-    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;background:#f8f1e2;color:#3a2a1a;margin:0}
-    .container{max-width:900px;margin:0 auto;padding:1.25rem}
-    a{color:#8b5e34}
-    header,footer{border-bottom:1px solid #e5d9c8;background:#fbf6ec}
-    footer{border-top:1px solid #e5d9c8;border-bottom:none;margin-top:2rem}
-    h1{margin:.2rem 0 1rem 0}
-    .card{background:#fff8ec;border:1px solid #eadcc8;border-radius:12px;padding:1rem}
-    .small{font-size:.92rem}
-    .todo{background:#fff3cd;border:1px dashed #b08900;padding:.6rem;border-radius:.5rem}
+:root{--bg:#f8f1e2;--ink:#2c2217;--muted:#6b5b49;--accent:#8b5e34;--brand:#2a2a2a;--card:#fff8ec;--line:#eadcc8;--radius:14px}
+*{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.55}
+a{color:var(--accent);text-decoration:none} a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:0 auto;padding:clamp(.9rem,2.8vw,1.25rem)}
+header{position:sticky;top:0;background:rgba(248,241,226,.92);backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid var(--line)}
+.header-row{display:flex;justify-content:space-between;align-items:center}
+.brand{display:flex;gap:.75rem;font-weight:800;color:var(--brand)}
+nav a{padding:.55rem .7rem;border-radius:.6rem} nav a:hover{background:#efe5d3}
+main{padding-bottom:3rem}
+.section{padding:clamp(1rem,3vw,1.25rem)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:clamp(1rem,2.6vw,1.25rem)}
+.small{font-size:.95rem;color:var(--muted)}
+footer{border-top:1px solid var(--line);background:#fbf6ec;color:var(--muted)}
   </style>
 </head>
 <body>
-  <header><div class="container"><a href="index.html">← Start</a></div></header>
-  <main class="container">
-    <h1>Impressum</h1>
-    <div class="card small">
-      <p><strong>Anbieter (§ 5 TMG)</strong><br>
-      Martin Hohenstein &amp; Anke Klotzbach<br>
-      Brauhausberg 30, 14473 Potsdam, Deutschland<br>
-      E-Mail: <a href="mailto:kontakt@ritter-ruben.de">kontakt@ritter-ruben.de</a>
+<header>
+  <div class="container header-row">
+    <a class="brand" href="index.html">Ritter Ruben</a>
+    <nav>
+      <a href="index.html">Start</a>
+      <a href="datenschutz.html">Datenschutz</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <section class="container section">
+    <div class="card">
+      <h1>Impressum</h1>
+      <p><strong>Angaben gemäß § 5 TMG</strong></p>
+      <p>
+        Martin Hohenstein<br>
+        (Mitwirkende: Anke Klotzbach)<br>
+        Brauhausberg&nbsp;30<br>
+        14473&nbsp;Potsdam<br>
+        Deutschland
       </p>
 
-      <p><strong>Inhaltlich verantwortlich (i.S.d. § 18 Abs. 2 MStV)</strong><br>
-      Martin Hohenstein, Anschrift wie oben
+      <p><strong>Kontakt</strong><br>
+        E-Mail: <a href="mailto:kontakt@ritter-ruben.de">kontakt@ritter-ruben.de</a><br>
+        <!-- Optional: Telefon:  -->
       </p>
 
-      <p><strong>Urheberrecht</strong><br>
-      Texte, Illustrationen, Logos und Layouts auf dieser Website sind urheberrechtlich geschützt. © 2025 Martin Hohenstein &amp; Anke Klotzbach. Jede Verwertung außerhalb der engen Grenzen des Urheberrechts bedarf der vorherigen schriftlichen Zustimmung der Rechteinhaber.</p>
+      <!-- USt-IdNr. nur angeben, wenn vorhanden -->
+      <!-- <p><strong>Umsatzsteuer-ID</strong> (falls vorhanden, §27a UStG)<br>USt-IdNr.: DE-…</p> -->
 
-      <p><strong>Haftung für Inhalte</strong><br>
-      Wir erstellen die Inhalte dieser Seiten mit größter Sorgfalt. Für die Richtigkeit, Vollständigkeit und Aktualität übernehmen wir jedoch keine Gewähr.</p>
+      <!-- Nur nötig, wenn ihr journalistisch-redaktionelle Inhalte anbietet -->
+      <!-- <p><strong>Verantwortlich für den Inhalt</strong> nach § 18 Abs. 2 MStV:<br>Martin Hohenstein, Anschrift wie oben.</p> -->
 
-      <p><strong>Haftung für Links</strong><br>
-      Externe Links wurden zum Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Auf die Inhalte verlinkter Seiten haben wir keinen Einfluss.</p>
+      <h2>Urheberrecht</h2>
+      <p>Texte, Illustrationen, Logos und Layouts sind urheberrechtlich geschützt. Jede Nutzung
+        bedarf der vorherigen schriftlichen Zustimmung der Rechteinhaber.</p>
 
-      <p><strong>Bildnachweis</strong><br>
-      Titel/Teaser-Grafik: © 2025 Martin Hohenstein, Anke Klotzbach.</p>
+      <h2>Haftung für Inhalte</h2>
+      <p>Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte verantwortlich.
+        Nach §§ 8–10 TMG sind wir nicht verpflichtet, übermittelte oder gespeicherte fremde
+        Informationen zu überwachen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung
+        von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.</p>
+
+      <h2>Haftung für Links</h2>
+      <p>Diese Website kann Links zu externen Seiten enthalten. Für deren Inhalte übernehmen wir
+        keine Gewähr; verantwortlich ist der jeweilige Anbieter.</p>
+
+      <h2>Online-Streitbeilegung</h2>
+      <p>Die Europäische Kommission stellt eine Plattform zur Online-Streitbeilegung (OS) bereit.
+        Wir sind weder verpflichtet noch bereit, an Streitbeilegungsverfahren vor einer
+        Verbraucherschlichtungsstelle teilzunehmen.</p>
+
+      <p class="small">Stand: Oktober&nbsp;2025</p>
     </div>
-  </main>
-  <footer><div class="container small">© 2025 Martin Hohenstein &amp; Anke Klotzbach – Alle Rechte vorbehalten.</div></footer>
+  </section>
+</main>
+
+<footer>
+  <div class="container section small">
+    © 2025 Martin Hohenstein &amp; Anke Klotzbach · <a href="datenschutz.html">Datenschutz</a>
+  </div>
+</footer>
 </body>
 </html>
