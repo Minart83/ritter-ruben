@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ritter Ruben · Offizielle Website</title>
+  <meta name="description" content="Ritter Ruben – Ein junger Ritter, ein Kristallfuchs, ein leises Wunder. Eine Kinderbuchreihe von Martin Hohenstein &amp; Anke Klotzbach.">
+  <style>
+:root{
+  --bg:#f8f1e2;
+  --ink:#3a2a1a;
+  --accent:#8b5e34;
+  --brand:#2a2a2a;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;line-height:1.55}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+.container{max-width:1000px;margin:0 auto;padding:1.25rem}
+header{position:sticky;top:0;background:rgba(248,241,226,.9);backdrop-filter:saturate(1.2) blur(8px);border-bottom:1px solid #e5d9c8;z-index:10}
+.brand{display:flex;align-items:center;gap:.75rem;font-weight:700}
+.brand span{font-size:1.15rem;letter-spacing:.02em}
+nav{display:flex;gap:1rem;align-items:center}
+nav a{padding:.4rem .6rem;border-radius:.6rem}
+nav a:hover{background:#efe5d3}
+.header-row{display:flex;justify-content:space-between;align-items:center}
+.hero{display:grid;grid-template-columns:1fr;gap:1rem;align-items:center;padding:1.25rem}
+.hero img{width:100%;height:auto;border-radius:12px;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+.hero-text{padding:.5rem 0}
+.hero h1{margin:.2rem 0 .4rem 0;font-size:clamp(1.6rem,3.5vw,2.4rem);line-height:1.2;color:var(--brand)}
+.hero p{margin:0;color:#5b4b3a}
+.cta{display:flex;gap:.8rem;flex-wrap:wrap;margin-top:.8rem}
+.cta a{display:inline-block;padding:.65rem .9rem;border-radius:999px;background:var(--accent);color:#fff;font-weight:600}
+.cta a.secondary{background:#e6d6bf;color:var(--brand)}
+main{padding-bottom:3rem}
+.section{padding:1.25rem}
+.card{background:#fff8ec;border:1px solid #eadcc8;border-radius:12px;padding:1rem}
+footer{border-top:1px solid #e5d9c8;background:#fbf6ec;color:#5b4b3a}
+.footer-grid{display:grid;grid-template-columns:1fr;gap:1rem}
+.small{font-size:.9rem}
+.caption{font-size:.85rem;color:#6b5b49;margin-top:.35rem}
+@media(min-width:820px){
+  .hero{grid-template-columns:1.2fr .9fr}
+  .footer-grid{grid-template-columns:2fr 1fr}
+}
+
+.timeline{display:grid;grid-template-columns:1fr;gap:.75rem;margin-top:.75rem}
+.titem{background:#fff;border:1px solid #eadcc8;border-radius:12px;padding:.8rem}
+.tdate{font-weight:700}
+.ttitle{margin:.2rem 0 .1rem 0}
+.tmeta{font-size:.85rem;color:#6b5b49}
+@media(min-width:700px){.timeline{grid-template-columns:1fr 1fr}}
+@media(min-width:1024px){.timeline{grid-template-columns:1fr 1fr 1fr}}
+
+</style>
+</head>
+<body>
+  <header>
+    <div class="container header-row">
+      <a class="brand" href="index.html" aria-label="Startseite">
+        <span>Ritter Ruben</span>
+      </a>
+      <nav>
+        <a href="index.html">Start</a>
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <img src="images/teaser.png" alt="Teaser: Ein junger Ritter, ein Kristallfuchs, ein leises Wunder." loading="eager">
+      <div class="hero-text">
+        <h1>Ein junger Ritter, ein Kristallfuchs, ein leises Wunder</h1>
+        <p><em>Manche Geschichten werden nicht geschrieben – sie werden gerufen.</em></p>
+        <div class="caption">Abbildung: © 2025 Martin Hohenstein, Anke Klotzbach – Alle Rechte vorbehalten.</div>
+        <div class="cta">
+          <a href="#about">Mehr erfahren</a>
+          <a class="secondary" href="impressum.html">Rechtliches &amp; Kontakt</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="container section">
+      <div class="card">
+        <h2>Über das Projekt</h2>
+        <p>„Ritter Ruben“ entsteht mit viel Herz, ruhigem Humor und mittelalterlicher Atmosphäre. Im Mittelpunkt stehen Geduld, Rücksicht und leiser Mut – erzählt in kindgerechten Bildern und kurzen, dichten Szenen.</p>
+        <p class="small"><strong>Urheberrecht:</strong> Texte, Illustrationen, Logos und Layouts auf dieser Website sind urheberrechtlich geschützt. Jede Nutzung bedarf der vorherigen schriftlichen Zustimmung der Rechteinhaber Martin Hohenstein und Anke Klotzbach.</p>
+      </div>
+    </section>
+  
+    <section class="container section" id="timeline">
+      <div class="card">
+        <h2>Timeline & Monats‑Updates</h2>
+        <p class="small">Unser Ziel: jeden Monat etwas Schönes – ein Artwork, ein kurzer Steckbrief oder ein Blick hinter die Kulissen. Hier ist der vorläufige Plan (flexibel):</p>
+        <div class="timeline">
+          
+        <div class="titem">
+          <div class="tdate">November 2025</div>
+          <div class="ttitle">Artwork: Ruben (Ganzfigur)</div>
+          <div class="tmeta">geplant · 1 Beitrag</div>
+        </div>
+    
+        <div class="titem">
+          <div class="tdate">December 2025</div>
+          <div class="ttitle">Artwork: Kristallfuchs (transparentes Blau)</div>
+          <div class="tmeta">geplant · 1 Beitrag</div>
+        </div>
+    
+        <div class="titem">
+          <div class="tdate">January 2026</div>
+          <div class="ttitle">Figuren-Steckbrief: Catherina</div>
+          <div class="tmeta">geplant · 1 Beitrag</div>
+        </div>
+    
+        <div class="titem">
+          <div class="tdate">February 2026</div>
+          <div class="ttitle">Artwork: Eddie (mit weißem Fleck)</div>
+          <div class="tmeta">geplant · 1 Beitrag</div>
+        </div>
+    
+        <div class="titem">
+          <div class="tdate">March 2026</div>
+          <div class="ttitle">Figuren-Steckbrief: Einhart (mit Dreisatz)</div>
+          <div class="tmeta">geplant · 1 Beitrag</div>
+        </div>
+    
+        <div class="titem">
+          <div class="tdate">April 2026</div>
+          <div class="ttitle">Artwork: Gunnar (nordische Details)</div>
+          <div class="tmeta">geplant · 1 Beitrag</div>
+        </div>
+    
+        <div class="titem">
+          <div class="tdate">May 2026</div>
+          <div class="ttitle">Ort-Porträt: Burg Hohenstein</div>
+          <div class="tmeta">geplant · 1 Beitrag</div>
+        </div>
+    
+        <div class="titem">
+          <div class="tdate">June 2026</div>
+          <div class="ttitle">Figuren-Steckbrief: Berta & die „Kante“</div>
+          <div class="tmeta">geplant · 1 Beitrag</div>
+        </div>
+    
+        <div class="titem">
+          <div class="tdate">July 2026</div>
+          <div class="ttitle">Artwork: Trix (Aquarell-Gouache)</div>
+          <div class="tmeta">geplant · 1 Beitrag</div>
+        </div>
+    
+        <div class="titem">
+          <div class="tdate">August 2026</div>
+          <div class="ttitle">Ort-Porträt: Dorf Sternberg</div>
+          <div class="tmeta">geplant · 1 Beitrag</div>
+        </div>
+    
+        <div class="titem">
+          <div class="tdate">September 2026</div>
+          <div class="ttitle">Mini‑Szene: Leiser Mut</div>
+          <div class="tmeta">geplant · 1 Beitrag</div>
+        </div>
+    
+        <div class="titem">
+          <div class="tdate">October 2026</div>
+          <div class="ttitle">Teaser: Cover‑Entwicklung</div>
+          <div class="tmeta">geplant · 1 Beitrag</div>
+        </div>
+    
+        </div>
+        <p class="small">Du willst erinnert werden, wenn ein neuer Beitrag online geht? Schreib uns an <a href="mailto:kontakt@ritter-ruben.de?subject=Updates%20zu%20Ritter%20Ruben">kontakt@ritter-ruben.de</a>.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div class="small">
+        <strong>© 2025 Martin Hohenstein &amp; Anke Klotzbach.</strong> Alle Inhalte sind urheberrechtlich geschützt. Unbefugte Nutzung, Vervielfältigung oder Verbreitung ist nicht gestattet.
+      </div>
+      <div class="small" style="text-align:right">
+        <a href="impressum.html">Impressum</a> · <a href="datenschutz.html">Datenschutz</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
