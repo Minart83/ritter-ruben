@@ -167,6 +167,30 @@ footer{border-top:1px solid #e5d9c8;background:#fbf6ec;color:var(--muted)}
 .comment-list{list-style:none;margin:.7rem 0 0 0;padding:0}
 .comment-list li{padding:.55rem .6rem;border:1px solid var(--line);border-radius:.6rem;background:#fff;margin-bottom:.45rem}
 .comment-list .meta{font-size:.85rem;color:var(--muted);margin-bottom:.15rem}
+
+/* ==== Image Lightbox (Zoom) ==== */
+img[data-zoom]{cursor:zoom-in}
+.lb-backdrop{
+  position:fixed;inset:0;display:none;align-items:center;justify-content:center;
+  background:rgba(20,16,12,.72);backdrop-filter:blur(2px);z-index:60;
+}
+.lb-backdrop[aria-hidden="false"]{display:flex}
+.lb-figure{max-width:min(96vw,1400px);max-height:92vh;margin:0;position:relative}
+.lb-img{
+  max-width:100%;max-height:86vh;border-radius:12px;box-shadow:var(--shadow);
+  outline:1px solid rgba(255,255,255,.18)
+}
+.lb-cap{
+  color:#f2e8d8;font-size:.95rem;line-height:1.35;margin-top:.5rem;text-align:center
+}
+.lb-close{
+  position:absolute;top:-12px;right:-12px;border:none;border-radius:999px;
+  width:40px;height:40px;background:#2a2a2a;color:#fff;font-weight:700;
+  box-shadow:var(--shadow);cursor:pointer
+}
+@media (hover:hover){
+  .lb-close:hover{background:#4a3b2a}
+}
   </style>
 </head>
 <body>
@@ -201,7 +225,7 @@ footer{border-top:1px solid #e5d9c8;background:#fbf6ec;color:var(--muted)}
 
   <main>
     <section class="hero container">
-      <img src="images/teaser.png" alt="Teaser: Ein junger Ritter, ein Kristallfuchs, ein leises Wunder." loading="eager">
+      <img src="images/teaser.png" alt="Teaser: Ein junger Ritter, ein Kristallfuchs, ein leises Wunder." loading="eager" data-zoom>
       <div class="hero-text">
         <h1>Manche Geschichten werden nicht geschrieben – sie werden gerufen.</h1>
         <div class="caption">Abbildung: © 2025 Martin Hohenstein, Anke Klotzbach – Alle Rechte vorbehalten.</div>
@@ -233,8 +257,9 @@ footer{border-top:1px solid #e5d9c8;background:#fbf6ec;color:var(--muted)}
 
             <figure class="media" style="margin:.4rem 0 .3rem">
               <img src="images/nov-2025-ruben-panel.png"
+                   data-full="images/nov-2025-ruben-panel.png"
                    alt="Ruben entdeckt eine leuchtende Fährte – Panel-Illustration im Kinderbuchstil."
-                   loading="lazy" style="border-radius:10px">
+                   loading="lazy" style="border-radius:10px" data-zoom>
               <figcaption class="caption small">
                 © 2025 Martin Hohenstein, Anke Klotzbach – Alle Rechte vorbehalten.
               </figcaption>
@@ -249,12 +274,12 @@ footer{border-top:1px solid #e5d9c8;background:#fbf6ec;color:var(--muted)}
                 <div class="row">
                   <label class="small" style="flex:1;display:block;margin-bottom:.4rem">
                     Name<br>
-                    <input name="name" required placeholder="Dein Name">
+                    <input name="name" required placeholder="Dein Name" autocomplete="off" inputmode="text">
                   </label>
                 </div>
                 <label class="small" style="display:block;margin-bottom:.5rem">
                   Kommentar<br>
-                  <textarea name="text" rows="3" required placeholder="Schreib uns etwas Freundliches …"></textarea>
+                  <textarea name="text" rows="3" required placeholder="Schreib uns etwas Freundliches …" autocomplete="off"></textarea>
                 </label>
                 <button type="submit" class="btn">Senden</button>
               </form>
@@ -362,7 +387,8 @@ footer{border-top:1px solid #e5d9c8;background:#fbf6ec;color:var(--muted)}
   // Schließt mobiles Menü bei Escape und Klick außerhalb
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
   document.addEventListener('click', (e)=>{
-    if(!panel.contains(e.target) && e.target!==btn && panel.style.display==='block'){ closeMenu(); }
+    const clickOnBtn = e.target.closest && e.target.closest('#menuBtn');
+    if(!panel.contains(e.target) && !clickOnBtn && panel.style.display==='block'){ closeMenu(); }
   });
 
   // ====== Comments (localStorage) ======
@@ -408,6 +434,59 @@ footer{border-top:1px solid #e5d9c8;background:#fbf6ec;color:var(--muted)}
   document.addEventListener('DOMContentLoaded', ()=>{
     document.querySelectorAll('.comments').forEach(renderComments);
   });
+
+  // ====== Image Lightbox (Zoom) ======
+  (function(){
+    const backdrop = document.createElement('div');
+    backdrop.className = 'lb-backdrop';
+    backdrop.setAttribute('aria-hidden','true');
+    backdrop.innerHTML = `
+      <figure class="lb-figure" role="dialog" aria-modal="true" aria-label="Bildvorschau">
+        <button class="lb-close" aria-label="Schließen">×</button>
+        <img class="lb-img" alt="">
+        <figcaption class="lb-cap"></figcaption>
+      </figure>`;
+    document.body.appendChild(backdrop);
+
+    const fig = backdrop.querySelector('.lb-figure');
+    const img = backdrop.querySelector('.lb-img');
+    const cap = backdrop.querySelector('.lb-cap');
+    const closeBtn = backdrop.querySelector('.lb-close');
+    let lastFocus = null;
+
+    function openLightbox(fromImg){
+      lastFocus = document.activeElement;
+      const full = fromImg.getAttribute('data-full') || fromImg.src;
+      img.src = full;
+      img.alt = fromImg.alt || '';
+      const fc = fromImg.closest('figure')?.querySelector('figcaption');
+      cap.textContent = fc ? fc.textContent.trim() : (fromImg.alt || '');
+      backdrop.setAttribute('aria-hidden','false');
+      document.documentElement.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+    function closeLightbox(){
+      backdrop.setAttribute('aria-hidden','true');
+      document.documentElement.style.overflow = '';
+      img.src = '';
+      if(lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+
+    document.addEventListener('click', (e)=>{
+      const t = e.target;
+      if(t instanceof HTMLImageElement && t.hasAttribute('data-zoom')){
+        e.preventDefault();
+        openLightbox(t);
+      }
+    });
+
+    backdrop.addEventListener('click', (e)=>{
+      if(!e.target.closest('.lb-figure') || e.target === closeBtn){ closeLightbox(); }
+    });
+    document.addEventListener('keydown', (e)=>{
+      if(backdrop.getAttribute('aria-hidden') === 'false' && (e.key === 'Escape' || e.key === 'Esc')) closeLightbox();
+    });
+  })();
   </script>
 </body>
 </html>
