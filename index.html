@@ -154,6 +154,19 @@ footer{border-top:1px solid #e5d9c8;background:#fbf6ec;color:var(--muted)}
   .header-row{padding-block:.35rem}
   .container{padding:clamp(.8rem,3.5vw,1.1rem)}
 }
+
+/* ==== Comments (Timeline) ==== */
+.comments{margin-top:.6rem;padding:.75rem;border:1px solid var(--line);border-radius:10px;background:#fff}
+.comment-form input,.comment-form textarea{
+  width:100%;padding:.6rem;border:1px solid var(--line);border-radius:.6rem;background:#fff8ec
+}
+.comment-form .btn{
+  display:inline-block;margin-top:.2rem;padding:.55rem .9rem;border-radius:999px;
+  background:var(--accent);color:#fff;border:none;box-shadow:var(--shadow);font-weight:600;cursor:pointer
+}
+.comment-list{list-style:none;margin:.7rem 0 0 0;padding:0}
+.comment-list li{padding:.55rem .6rem;border:1px solid var(--line);border-radius:.6rem;background:#fff;margin-bottom:.45rem}
+.comment-list .meta{font-size:.85rem;color:var(--muted);margin-bottom:.15rem}
   </style>
 </head>
 <body>
@@ -213,10 +226,40 @@ footer{border-top:1px solid #e5d9c8;background:#fbf6ec;color:var(--muted)}
         <p class="small">Unser Ziel: jeden Monat etwas Schönes – ein Artwork, ein kurzer Steckbrief oder ein Blick hinter die Kulissen. Hier ist der vorläufige Plan (flexibel):</p>
 
         <div class="timeline">
-          <div class="titem">
+          <!-- NOVEMBER 2025: mit Bild + Kommentaren -->
+          <div class="titem" id="nov-2025">
             <div class="tdate">November 2025</div>
             <div class="ttitle">Artwork: Ruben</div>
-            <div class="tmeta">geplant · 1 Beitrag</div>
+
+            <figure class="media" style="margin:.4rem 0 .3rem">
+              <img src="images/nov-2025-ruben-panel.png"
+                   alt="Ruben entdeckt eine leuchtende Fährte – Panel-Illustration im Kinderbuchstil."
+                   loading="lazy" style="border-radius:10px">
+              <figcaption class="caption small">
+                © 2025 Martin Hohenstein, Anke Klotzbach – Alle Rechte vorbehalten.
+              </figcaption>
+            </figure>
+
+            <div class="tmeta">veröffentlicht · 1 Beitrag</div>
+
+            <!-- Kommentare (lokal, per localStorage) -->
+            <div class="comments" data-key="comments-nov-2025" aria-label="Kommentare zu November 2025">
+              <h3 style="margin:.7rem 0 .35rem;font-size:1.05rem;color:var(--brand)">Kommentare</h3>
+              <form class="comment-form" onsubmit="return addComment(event, this)">
+                <div class="row">
+                  <label class="small" style="flex:1;display:block;margin-bottom:.4rem">
+                    Name<br>
+                    <input name="name" required placeholder="Dein Name">
+                  </label>
+                </div>
+                <label class="small" style="display:block;margin-bottom:.5rem">
+                  Kommentar<br>
+                  <textarea name="text" rows="3" required placeholder="Schreib uns etwas Freundliches …"></textarea>
+                </label>
+                <button type="submit" class="btn">Senden</button>
+              </form>
+              <ul class="comment-list" aria-live="polite" aria-relevant="additions"></ul>
+            </div>
           </div>
 
           <div class="titem">
@@ -320,6 +363,50 @@ footer{border-top:1px solid #e5d9c8;background:#fbf6ec;color:var(--muted)}
   document.addEventListener('keydown', (e)=>{ if(e.key==='Escape') closeMenu(); });
   document.addEventListener('click', (e)=>{
     if(!panel.contains(e.target) && e.target!==btn && panel.style.display==='block'){ closeMenu(); }
+  });
+
+  // ====== Comments (localStorage) ======
+  function esc(s){ return String(s).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+
+  function renderComments(box){
+    const key = box.dataset.key;
+    const list = JSON.parse(localStorage.getItem(key) || '[]');
+    const ul = box.querySelector('.comment-list');
+    ul.innerHTML = '';
+    list.forEach(item=>{
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <div class="meta">${esc(item.name)} · <time datetime="${esc(item.iso)}">${esc(item.when)}</time></div>
+        <div class="text">${esc(item.text)}</div>
+      `;
+      ul.appendChild(li);
+    });
+  }
+
+  function addComment(e, form){
+    e.preventDefault();
+    const box = form.closest('.comments');
+    const key = box.dataset.key;
+    const name = form.name.value.trim();
+    const text = form.text.value.trim();
+    if(!name || !text) return false;
+
+    const now = new Date();
+    const item = {
+      name, text,
+      iso: now.toISOString(),
+      when: now.toLocaleString()
+    };
+    const list = JSON.parse(localStorage.getItem(key) || '[]');
+    list.push(item);
+    localStorage.setItem(key, JSON.stringify(list));
+    form.reset();
+    renderComments(box);
+    return false;
+  }
+
+  document.addEventListener('DOMContentLoaded', ()=>{
+    document.querySelectorAll('.comments').forEach(renderComments);
   });
   </script>
 </body>
